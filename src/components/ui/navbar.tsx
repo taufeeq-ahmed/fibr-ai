@@ -6,6 +6,7 @@ import fibrLogo from '@/public/fibr-logo.webp';
 import Link from 'next/link';
 import { MdDashboard } from 'react-icons/md';
 import { IoIosCreate } from 'react-icons/io';
+import { FaUserPlus, FaUser } from 'react-icons/fa';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 
@@ -47,14 +48,22 @@ function Navbar() {
       <ul className="flex gap-4">
         <Link
           href="/signup"
-          className="font-medium flex gap-1 justify-center items-center"
+          className={cn(
+            'font-medium flex gap-1 justify-center items-center',
+            pathname.includes('signup') ? 'text-[#6879f9]' : '',
+          )}
         >
+          <FaUserPlus size={20} />
           SingUp
         </Link>
         <Link
           href="/signin"
-          className="font-medium flex gap-1 justify-center items-center"
+          className={cn(
+            'font-medium flex gap-1 justify-center items-center',
+            pathname.includes('signin') ? 'text-[#6879f9]' : '',
+          )}
         >
+          <FaUser />
           SignIn
         </Link>
       </ul>
