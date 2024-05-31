@@ -12,6 +12,7 @@
         ]
       }
     ],
-    "import/extensions":[0]
+    "import/extensions":[0],
+    "react/jsx-props-no-spreading":[0]
   }
 }
