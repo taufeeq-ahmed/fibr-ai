@@ -3,6 +3,7 @@ import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { SubmitHandler, UseFormReturn } from 'react-hook-form';
+import { CreatePageInputs } from '@/types/create-page';
 
 type ErrorProps={
       field: string
@@ -16,14 +17,9 @@ function Error({ field }:ErrorProps) {
   );
 }
 
-type Inputs = {
-    title: string
-    description: string
-}
-
 type CreateFormProps={
-    formControls : UseFormReturn<Inputs>
-    onSubmit:SubmitHandler<Inputs>
+    formControls : UseFormReturn<CreatePageInputs>
+    onSubmit:SubmitHandler<CreatePageInputs>
 }
 
 function CreateForm({ onSubmit, formControls }: CreateFormProps) {
@@ -31,7 +27,7 @@ function CreateForm({ onSubmit, formControls }: CreateFormProps) {
     register,
     handleSubmit,
     formState: { errors },
-  }:UseFormReturn<Inputs> = formControls;
+  }:UseFormReturn<CreatePageInputs> = formControls;
 
   return (
     <form

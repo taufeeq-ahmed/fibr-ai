@@ -3,18 +3,14 @@
 import React from 'react';
 import { useForm, SubmitHandler, UseFormReturn } from 'react-hook-form';
 
-import CreateForm from '../../../page-components/create-page/create-form';
-import ViewPage from '../../../page-components/create-page/view-page';
-
-type Inputs = {
-  title: string
-  description: string
-}
+import { CreatePageInputs } from '@/types/create-page';
+import ViewPage from '@/page-components/create-page/view-page';
+import CreateForm from '@/page-components/create-page/create-form';
 
 function CreatePage() {
-  const formControls:UseFormReturn<Inputs> = useForm<Inputs>();
+  const formControls:UseFormReturn<CreatePageInputs> = useForm<CreatePageInputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<CreatePageInputs> = (data) => console.log(data);
 
   return (
     <div className="flex">

@@ -1,13 +1,9 @@
+import { CreatePageInputs } from '@/types/create-page';
 import React from 'react';
 import { UseFormReturn } from 'react-hook-form';
 
-type Inputs = {
-    title: string
-    description: string
-}
-
 type ViewPageProps={
-    formControls : UseFormReturn<Inputs>
+    formControls : UseFormReturn<CreatePageInputs>
 }
 
 function ViewPage({ formControls }:ViewPageProps) {
