@@ -14,12 +14,14 @@ function Navbar() {
 
   return (
     <nav className="py-2 px-8 border-2 flex justify-between items-center">
-      <Image
-        src={fibrLogo}
-        alt="fibr-logo"
-        width={80}
-        height={80}
-      />
+      <Link href="/">
+        <Image
+          src={fibrLogo}
+          alt="fibr-logo"
+          width={80}
+          height={80}
+        />
+      </Link>
       <ul className="flex gap-4">
         <Link
           href="/dashboard"
