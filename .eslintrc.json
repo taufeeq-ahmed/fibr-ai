@@ -1,3 +1,17 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "next",
+    "airbnb"
+  ],
+  "rules": {
+    "react/jsx-filename-extension": [
+      0,
+      {
+        "extensions": [
+          ".tsx"
+        ]
+      }
+    ],
+    "import/extensions":[0]
+  }
 }
