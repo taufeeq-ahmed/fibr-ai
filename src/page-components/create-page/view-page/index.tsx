@@ -10,7 +10,7 @@ function ViewPage({ formControls }:ViewPageProps) {
   const { watch } = formControls;
 
   return (
-    <div className="w-1/3 flex justify-center items-center">
+    <div className="w-1/3 flex justify-center items-center scale-90">
       <div
         className="preview border-2 bg-black w-[390px] h-[844px] rounded-md text-white p-4"
       >

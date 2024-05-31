@@ -50,7 +50,7 @@ function CreateForm({ onSubmit, formControls }: CreateFormProps) {
       />
       {errors.description && <Error field="description" /> }
 
-      <Button>
+      <Button className="bg-[#6879f9]">
         Save
       </Button>
     </form>
