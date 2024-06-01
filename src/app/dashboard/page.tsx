@@ -1,3 +1,4 @@
+import { Input } from '@/components/ui/input';
 import supabase from '@/db/supabase';
 import ListPagesItem from '@/page-components/dashboard-page/ListPagesItem';
 import React from 'react';
@@ -11,9 +12,17 @@ const getAllLandingPages = async () => {
 
 async function Dashboard() {
   const pages = await getAllLandingPages();
+
   return (
-    <div>
-      <ul className="flex flex-col gap-4 p-4 ">
+    <div className="p-8 ">
+      <div className="mb-4 flex justify-between items-center">
+        <h2 className="text-lg font-semibold">List of all Landing Pages</h2>
+        <Input
+          placeholder="Search for Pages"
+          className="w-[600px]"
+        />
+      </div>
+      <ul className="flex flex-col gap-4 ">
         {pages?.map((pg) => (
           <ListPagesItem
             title={pg.title}
