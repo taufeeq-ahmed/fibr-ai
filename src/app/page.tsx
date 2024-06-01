@@ -1,8 +1,12 @@
+import MobileView from '@/components/ui/mobileview';
 import React from 'react';
 
 function Home() {
   return (
-    <div>Home</div>
+    <MobileView
+      title="Coffe"
+      description="hello"
+    />
   );
 }
 
