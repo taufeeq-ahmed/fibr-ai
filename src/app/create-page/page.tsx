@@ -8,9 +8,12 @@ import ViewPage from '@/page-components/create-page/view-page';
 import CreateForm from '@/page-components/create-page/create-form';
 import supabase from '@/db/supabase';
 import { toKebabCase } from '@/lib/utils';
+import { useRouter } from 'next/navigation';
 
 function CreatePage() {
   const formControls:UseFormReturn<CreatePageInputs> = useForm<CreatePageInputs>();
+
+  const router = useRouter();
 
   const onSubmit: SubmitHandler<CreatePageInputs> = async (data) => {
     const { title, description } = data;
@@ -24,7 +27,7 @@ function CreatePage() {
       })
       .select();
 
-    console.log('saved');
+    router.push('/dashboard');
   };
 
   return (
