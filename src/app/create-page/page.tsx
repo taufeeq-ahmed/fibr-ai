@@ -4,7 +4,7 @@ import React from 'react';
 import { useForm, SubmitHandler, UseFormReturn } from 'react-hook-form';
 
 import { CreatePageInputs } from '@/types/create-page';
-import ViewPage from '@/page-components/create-page/view-page';
+import ViewPage from '@/page-components/create-page/preview-page';
 import CreateForm from '@/page-components/create-page/create-form';
 import supabase from '@/db/supabase';
 import { toKebabCase } from '@/lib/utils';
