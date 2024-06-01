@@ -14,7 +14,8 @@ import CreateEditForm from '@/page-components/create-page/create-edit-form';
 
 type Page={
   title:string,
-  description:string
+  description:string,
+  id:number
 }
 
 const getPage = async (slug:string) => {
@@ -49,11 +50,12 @@ function EditPage({ params }:{params:{pageSlug:string}}) {
 
     await supabase
       .from('pages')
-      .upsert({
+      .update({
         title,
         description,
         slug: toKebabCase(title),
       })
+      .eq('id', page?.id)
       .select();
     toast.success('Landing Page is Updated Successfully');
     router.push('/dashboard');
