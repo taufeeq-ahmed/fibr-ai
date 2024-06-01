@@ -16,7 +16,7 @@ async function Dashboard() {
   return (
     <div className="p-8 ">
       <div className="mb-4 flex justify-between items-center">
-        <h2 className="text-lg font-semibold">List of all Landing Pages</h2>
+        <h2 className="text-2xl font-semibold">List of all the Landing Pages</h2>
         <Input
           placeholder="Search for Pages"
           className="w-[600px]"

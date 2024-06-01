@@ -33,31 +33,36 @@ function ListPagesItem({
           </p>
         </div>
 
-        <div className=" flex gap-2 items-end">
+        <div className=" flex gap-2 justify-between items-end w-full">
 
-          <Link href={`/preview-page/${slug}`}>
-            <Button className="font-lg flex gap-2">
-              {' '}
-              <MdOutlinePreview size={20} />
-              Preview
-              {' '}
-            </Button>
-          </Link>
+          <div className="flex gap-2">
+            <Link href={`/preview-page/${slug}`}>
+              <Button
+                className="font-lg flex gap-2"
+                variant="outline"
+              >
+                {' '}
+                <MdOutlinePreview size={20} />
+                Preview
+                {' '}
+              </Button>
+            </Link>
 
-          <Link href={`/edit-page/${slug}`}>
-            <Button
-              className="font-lg flex gap-2 text-blue-500 border-blue-500"
-              variant="outline"
-            >
-              {' '}
-              <FaEdit size={15} />
-              Edit
-              {' '}
-            </Button>
-          </Link>
+            <Link href={`/edit-page/${slug}`}>
+              <Button
+                className="font-lg flex gap-2 "
+                variant="outline"
+              >
+                {' '}
+                <FaEdit size={15} />
+                Edit
+                {' '}
+              </Button>
+            </Link>
+          </div>
 
           <Button
-            className="font-lg flex gap-2 bg-white text-red-500 border-red-500"
+            className="font-lg flex gap-2 bg-white  "
             variant="outline"
           >
             {' '}
