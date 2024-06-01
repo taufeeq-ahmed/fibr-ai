@@ -9,6 +9,7 @@ import CreateForm from '@/page-components/create-page/create-form';
 import supabase from '@/db/supabase';
 import { toKebabCase } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 function CreatePage() {
   const formControls:UseFormReturn<CreatePageInputs> = useForm<CreatePageInputs>();
@@ -26,7 +27,7 @@ function CreatePage() {
         slug: toKebabCase(title),
       })
       .select();
-
+    toast.success('Landing Page is created Successfully');
     router.push('/dashboard');
   };
 
