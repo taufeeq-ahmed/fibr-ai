@@ -5,11 +5,12 @@ import { useForm, SubmitHandler, UseFormReturn } from 'react-hook-form';
 
 import { CreatePageInputs } from '@/types/create-page';
 import ViewPage from '@/page-components/create-page/preview-page';
-import CreateForm from '@/page-components/create-page/create-form';
+
 import supabase from '@/db/supabase';
 import { toKebabCase } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+import CreateEditForm from '@/page-components/create-page/create-edit-form';
 
 function CreatePage() {
   const formControls:UseFormReturn<CreatePageInputs> = useForm<CreatePageInputs>();
@@ -33,7 +34,7 @@ function CreatePage() {
 
   return (
     <div className="flex">
-      <CreateForm
+      <CreateEditForm
         onSubmit={onSubmit}
         formControls={formControls}
       />

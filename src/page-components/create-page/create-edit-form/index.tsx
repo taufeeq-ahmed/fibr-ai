@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 import React from 'react';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
@@ -20,9 +21,13 @@ function Error({ field }:ErrorProps) {
 type CreateFormProps={
     formControls : UseFormReturn<CreatePageInputs>
     onSubmit:SubmitHandler<CreatePageInputs>
+    defaultValues?: {
+      title:string,
+      description:string
+    }
 }
 
-function CreateForm({ onSubmit, formControls }: CreateFormProps) {
+function CreateEditForm({ onSubmit, formControls, defaultValues }: CreateFormProps) {
   const {
     register,
     handleSubmit,
@@ -38,6 +43,7 @@ function CreateForm({ onSubmit, formControls }: CreateFormProps) {
       <Input
         id="title"
         placeholder="Title"
+        defaultValue={defaultValues?.title || ''}
         {...register('title', { required: true })}
       />
       {errors.title && <Error field="title" /> }
@@ -47,6 +53,7 @@ function CreateForm({ onSubmit, formControls }: CreateFormProps) {
         id="description"
         placeholder="Description"
         {...register('description', { required: true })}
+        defaultValue={defaultValues?.description || ''}
       />
       {errors.description && <Error field="description" /> }
 
@@ -57,4 +64,4 @@ function CreateForm({ onSubmit, formControls }: CreateFormProps) {
   );
 }
 
-export default CreateForm;
+export default CreateEditForm;
