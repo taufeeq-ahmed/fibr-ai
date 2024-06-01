@@ -1,7 +1,9 @@
+'use client';
+
 import { Input } from '@/components/ui/input';
 import supabase from '@/db/supabase';
 import ListPagesItem from '@/page-components/dashboard-page/ListPagesItem';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const getAllLandingPages = async () => {
   const { data: pages } = await supabase
@@ -10,8 +12,30 @@ const getAllLandingPages = async () => {
   return pages;
 };
 
-async function Dashboard() {
-  const pages = await getAllLandingPages();
+type Page = {
+  title:string,
+  description:string,
+  isLive: boolean,
+  slug:string
+}
+
+function Dashboard() {
+  const [pages, setPages] = useState<Page[]>([]);
+  const [query, setQuery] = useState<string>('');
+
+  let filteredPages = pages;
+
+  useEffect(() => {
+    getAllLandingPages().then(
+      (allPages) => setPages(allPages!),
+    );
+  }, []);
+
+  if (query.length !== 0) {
+    filteredPages = pages.filter(
+      (page) => page.title.toLowerCase().includes(query),
+    );
+  }
 
   return (
     <div className="p-8 ">
@@ -20,10 +44,12 @@ async function Dashboard() {
         <Input
           placeholder="Search for Pages"
           className="w-[600px]"
+          value={query}
+          onChange={(e) => { setQuery(e.target.value); }}
         />
       </div>
       <ul className="flex flex-col gap-4 ">
-        {pages?.map((pg) => (
+        {filteredPages?.map((pg) => (
           <ListPagesItem
             title={pg.title}
             description={pg.description}
