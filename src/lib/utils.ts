@@ -14,4 +14,11 @@ function toKebabCase(text: string): string {
   return text;
 }
 
-export { cn, toKebabCase };
+function truncateText(desc:string, maxLength:number) {
+  if (desc.length <= maxLength) {
+    return desc;
+  }
+  return `${desc.substring(0, maxLength)}...`;
+}
+
+export { cn, toKebabCase, truncateText };
