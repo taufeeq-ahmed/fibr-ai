@@ -1,10 +1,11 @@
 /* eslint-disable react/require-default-props */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { SubmitHandler, UseFormReturn } from 'react-hook-form';
+import { SubmitHandler, UseFormReturn, Controller } from 'react-hook-form';
 import { CreatePageInputs } from '@/types/create-page';
+import { Switch } from '@/components/ui/switch';
 
 type ErrorProps={
       field: string
@@ -18,21 +19,29 @@ function Error({ field }:ErrorProps) {
   );
 }
 
-type CreateFormProps={
+type CreateEditFormProps={
     formControls : UseFormReturn<CreatePageInputs>
     onSubmit:SubmitHandler<CreatePageInputs>
     defaultValues?: {
       title:string,
-      description:string
+      description:string,
+      isLive:boolean
     }
 }
 
-function CreateEditForm({ onSubmit, formControls, defaultValues }: CreateFormProps) {
+function CreateEditForm({ onSubmit, formControls, defaultValues }: CreateEditFormProps) {
   const {
     register,
     handleSubmit,
+    control, reset,
     formState: { errors },
   }:UseFormReturn<CreatePageInputs> = formControls;
+
+  useEffect(() => {
+    reset({
+      isLive: defaultValues?.isLive || false,
+    });
+  }, [defaultValues, reset]);
 
   return (
     <form
@@ -57,6 +66,20 @@ function CreateEditForm({ onSubmit, formControls, defaultValues }: CreateFormPro
       />
       {errors.description && <Error field="description" /> }
 
+      <Label htmlFor="isLive">Live Status</Label>
+
+      <Controller
+        name="isLive"
+        control={control}
+        defaultValue={defaultValues?.isLive || false}
+        render={({ field }) => (
+          <Switch
+            id="isLive"
+            checked={field.value}
+            onCheckedChange={field.onChange}
+          />
+        )}
+      />
       <Button className="bg-[#6879f9]">
         Save
       </Button>

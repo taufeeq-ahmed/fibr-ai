@@ -18,14 +18,14 @@ function CreatePage() {
   const router = useRouter();
 
   const onSubmit: SubmitHandler<CreatePageInputs> = async (data) => {
-    const { title, description } = data;
-
+    const { title, description, isLive } = data;
     await supabase
       .from('pages')
       .upsert({
         title,
         description,
         slug: toKebabCase(title),
+        isLive,
       })
       .select();
     toast.success('Landing Page is created Successfully');

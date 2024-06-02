@@ -15,7 +15,8 @@ import CreateEditForm from '@/page-components/create-page/create-edit-form';
 type Page={
   title:string,
   description:string,
-  id:number
+  id:number,
+  isLive:boolean
 }
 
 const getPage = async (slug:string) => {
@@ -46,7 +47,7 @@ function EditPage({ params }:{params:{pageSlug:string}}) {
   const router = useRouter();
 
   const onSubmit: SubmitHandler<EditPageInputs> = async (data) => {
-    const { title, description } = data;
+    const { title, description, isLive } = data;
 
     await supabase
       .from('pages')
@@ -54,6 +55,7 @@ function EditPage({ params }:{params:{pageSlug:string}}) {
         title,
         description,
         slug: toKebabCase(title),
+        isLive,
       })
       .eq('id', page?.id)
       .select();
