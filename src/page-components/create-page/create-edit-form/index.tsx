@@ -27,9 +27,12 @@ type CreateEditFormProps={
       description:string,
       isLive:boolean
     }
+    mode:'create'|'edit'
 }
 
-function CreateEditForm({ onSubmit, formControls, defaultValues }: CreateEditFormProps) {
+function CreateEditForm({
+  onSubmit, formControls, defaultValues, mode,
+}: CreateEditFormProps) {
   const {
     register,
     handleSubmit,
@@ -38,10 +41,14 @@ function CreateEditForm({ onSubmit, formControls, defaultValues }: CreateEditFor
   }:UseFormReturn<CreatePageInputs> = formControls;
 
   useEffect(() => {
-    reset({
-      isLive: defaultValues?.isLive || false,
-    });
-  }, [defaultValues, reset]);
+    if (mode === 'edit') {
+      reset({
+        title: defaultValues?.title || '',
+        description: defaultValues?.description || '',
+        isLive: defaultValues?.isLive || false,
+      });
+    }
+  }, [defaultValues, reset, mode]);
 
   return (
     <form
@@ -72,11 +79,11 @@ function CreateEditForm({ onSubmit, formControls, defaultValues }: CreateEditFor
         name="isLive"
         control={control}
         defaultValue={defaultValues?.isLive || false}
-        render={({ field }) => (
+        render={({ field: { value, onChange } }) => (
           <Switch
             id="isLive"
-            checked={field.value}
-            onCheckedChange={field.onChange}
+            checked={value}
+            onCheckedChange={(checked) => onChange(checked)}
           />
         )}
       />

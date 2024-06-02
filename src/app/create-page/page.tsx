@@ -35,6 +35,7 @@ function CreatePage() {
   return (
     <div className="flex">
       <CreateEditForm
+        mode="create"
         onSubmit={onSubmit}
         formControls={formControls}
       />

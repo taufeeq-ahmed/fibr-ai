@@ -39,9 +39,7 @@ function EditPage({ params }:{params:{pageSlug:string}}) {
     );
   }, [pageSlug]);
 
-  const formControls:UseFormReturn<EditPageInputs> = useForm<EditPageInputs>(
-    { defaultValues: page },
-  );
+  const formControls:UseFormReturn<EditPageInputs> = useForm<EditPageInputs>();
 
   const { watch } = formControls;
   const router = useRouter();
@@ -66,6 +64,7 @@ function EditPage({ params }:{params:{pageSlug:string}}) {
   return (
     <div className="flex">
       <CreateEditForm
+        mode="edit"
         onSubmit={onSubmit}
         formControls={formControls}
         defaultValues={page}
