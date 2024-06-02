@@ -8,7 +8,7 @@ import { CreatePageInputs } from '@/types/create-page';
 import { Switch } from '@/components/ui/switch';
 
 type ErrorProps={
-      field: string
+  field: string
 }
 
 function Error({ field }:ErrorProps) {
