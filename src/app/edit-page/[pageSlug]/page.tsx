@@ -18,6 +18,7 @@ type Page={
   id:number,
   isLive:boolean
   headerImage:FileList
+  imageUrl?:string
 }
 
 const getPage = async (slug:string) => {
@@ -79,6 +80,16 @@ function EditPage({ params }:{params:{pageSlug:string}}) {
     router.push('/dashboard');
   };
 
+  let image = null;
+
+  const imagesList = watch('headerImage');
+
+  if (imagesList && imagesList.length > 0) {
+    image = imagesList;
+  } else {
+    image = page?.imageUrl;
+  }
+
   return (
     <div className="flex">
       <CreateEditForm
@@ -91,6 +102,7 @@ function EditPage({ params }:{params:{pageSlug:string}}) {
       <MobileView
         title={watch('title') || page?.title || ''}
         description={watch('description') || page?.description || ''}
+        image={image}
       />
     </div>
   );

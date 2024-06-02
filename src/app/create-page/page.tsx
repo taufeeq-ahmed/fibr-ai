@@ -4,18 +4,19 @@ import React from 'react';
 import { useForm, SubmitHandler, UseFormReturn } from 'react-hook-form';
 
 import { CreatePageInputs } from '@/types/create-page';
-import ViewPage from '@/page-components/create-page/preview-page';
 
 import supabase from '@/db/supabase';
 import { toKebabCase } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import CreateEditForm from '@/page-components/create-page/create-edit-form';
+import MobileView from '@/components/ui/mobileview';
 
 function CreatePage() {
   const formControls:UseFormReturn<CreatePageInputs> = useForm<CreatePageInputs>();
 
   const router = useRouter();
+  const { watch } = formControls;
 
   const onSubmit: SubmitHandler<CreatePageInputs> = async (data) => {
     const {
@@ -57,8 +58,10 @@ function CreatePage() {
         onSubmit={onSubmit}
         formControls={formControls}
       />
-      <ViewPage
-        formControls={formControls}
+      <MobileView
+        title={watch('title')}
+        description={watch('description')}
+        image={watch('headerImage')}
       />
     </div>
   );
