@@ -20,7 +20,7 @@ function CreatePage() {
 
   const onSubmit: SubmitHandler<CreatePageInputs> = async (data) => {
     const {
-      title, description, isLive, headerImage,
+      title, description, isLive, headerImage, buyLink,
     } = data;
 
     let imageUrl = '';
@@ -45,6 +45,7 @@ function CreatePage() {
         slug: toKebabCase(title),
         isLive,
         imageUrl,
+        buyLink,
       })
       .select();
     toast.success('Landing Page is created Successfully');
@@ -62,6 +63,7 @@ function CreatePage() {
         title={watch('title')}
         description={watch('description')}
         image={watch('headerImage')}
+        buyLink={watch('buyLink')}
       />
     </div>
   );

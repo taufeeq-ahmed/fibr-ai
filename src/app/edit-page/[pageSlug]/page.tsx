@@ -19,6 +19,7 @@ type Page={
   isLive:boolean
   headerImage:FileList
   imageUrl?:string
+  buyLink:string
 }
 
 const getPage = async (slug:string) => {
@@ -48,7 +49,7 @@ function EditPage({ params }:{params:{pageSlug:string}}) {
 
   const onSubmit: SubmitHandler<EditPageInputs> = async (data) => {
     const {
-      title, description, isLive, headerImage,
+      title, description, isLive, headerImage, buyLink,
     } = data;
 
     let imageUrl = '';
@@ -73,6 +74,7 @@ function EditPage({ params }:{params:{pageSlug:string}}) {
         slug: toKebabCase(title),
         isLive,
         imageUrl,
+        buyLink,
       })
       .eq('id', page?.id)
       .select();
@@ -103,6 +105,7 @@ function EditPage({ params }:{params:{pageSlug:string}}) {
         title={watch('title') || page?.title || ''}
         description={watch('description') || page?.description || ''}
         image={image}
+        buyLink={watch('buyLink') || page?.buyLink || ''}
       />
     </div>
   );

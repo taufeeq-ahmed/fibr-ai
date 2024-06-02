@@ -27,6 +27,7 @@ type CreateEditFormProps={
       description:string,
       isLive:boolean
       headerImage:FileList
+      buyLink:string
     }
     mode:'create'|'edit'
 }
@@ -122,6 +123,14 @@ function CreateEditForm({
           register('headerImage').onChange(e);
           handleImageChange(e);
         }}
+      />
+
+      <Label htmlFor="buyLink">PLease Enter Buy Link</Label>
+      <Input
+        id="buyLink"
+        placeholder="Buy Link"
+        {...register('buyLink', { required: true })}
+        defaultValue={defaultValues?.buyLink || ''}
       />
 
       <Button className="bg-[#6879f9]">

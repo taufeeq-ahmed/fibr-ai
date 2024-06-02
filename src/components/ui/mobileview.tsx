@@ -7,6 +7,7 @@ type MobileViewProps = {
   description: string;
   scale?: 90 | 50 | 75 | 20;
   image: FileList | undefined|string;
+  buyLink:string
 };
 
 function MobileView({
@@ -14,6 +15,7 @@ function MobileView({
   description,
   scale = 90,
   image,
+  buyLink,
 }: MobileViewProps) {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
 
@@ -60,6 +62,7 @@ function MobileView({
       <div className="p-4">
         <h2 className="text-[36px] mb-4">{title}</h2>
         <p>{description}</p>
+        {buyLink && (<p>{buyLink}</p>)}
       </div>
     </div>
   );

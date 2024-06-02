@@ -3,6 +3,7 @@ type CreatePageInputs = {
     description: string
     isLive: boolean
     headerImage:FileList
+    buyLink:string
 }
 
 type EditPageInputs = {
@@ -10,6 +11,7 @@ type EditPageInputs = {
     description: string
     isLive:boolean
     headerImage:FileList
+    buyLink:string
 }
 
 export type { CreatePageInputs, EditPageInputs };
