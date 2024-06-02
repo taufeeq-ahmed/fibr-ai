@@ -17,6 +17,7 @@ type Page={
   description:string,
   id:number,
   isLive:boolean
+  headerImage:FileList
 }
 
 const getPage = async (slug:string) => {
@@ -45,8 +46,24 @@ function EditPage({ params }:{params:{pageSlug:string}}) {
   const router = useRouter();
 
   const onSubmit: SubmitHandler<EditPageInputs> = async (data) => {
-    const { title, description, isLive } = data;
+    const {
+      title, description, isLive, headerImage,
+    } = data;
 
+    let imageUrl = '';
+
+    if (headerImage && headerImage?.[0]) {
+      const imageFile = headerImage[0];
+
+      const { data: uploadData } = await supabase.storage
+        .from('imagesBucket')
+        .upload(`public/${imageFile.name}`, imageFile);
+
+      if (uploadData?.path) {
+        const { path } = uploadData;
+        imageUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/imagesBucket/${path}`;
+      }
+    }
     await supabase
       .from('pages')
       .update({
@@ -54,6 +71,7 @@ function EditPage({ params }:{params:{pageSlug:string}}) {
         description,
         slug: toKebabCase(title),
         isLive,
+        imageUrl,
       })
       .eq('id', page?.id)
       .select();

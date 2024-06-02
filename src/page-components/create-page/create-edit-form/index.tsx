@@ -1,5 +1,5 @@
 /* eslint-disable react/require-default-props */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -26,6 +26,7 @@ type CreateEditFormProps={
       title:string,
       description:string,
       isLive:boolean
+      headerImage:FileList
     }
     mode:'create'|'edit'
 }
@@ -40,15 +41,29 @@ function CreateEditForm({
     formState: { errors },
   }:UseFormReturn<CreatePageInputs> = formControls;
 
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+
   useEffect(() => {
     if (mode === 'edit') {
       reset({
         title: defaultValues?.title || '',
         description: defaultValues?.description || '',
         isLive: defaultValues?.isLive || false,
+        headerImage: defaultValues?.headerImage || undefined,
       });
+
+      if (defaultValues?.headerImage) {
+        setImagePreview(URL.createObjectURL(defaultValues.headerImage?.[0]));
+      }
     }
   }, [defaultValues, reset, mode]);
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setImagePreview(URL.createObjectURL(file));
+    }
+  };
 
   return (
     <form
@@ -87,6 +102,28 @@ function CreateEditForm({
           />
         )}
       />
+
+      {mode === 'edit' ? (
+        <Label htmlFor="image">
+          Upload New Image to Replace
+        </Label>
+      ) : (
+        <Label htmlFor="image">
+          Upload Image
+        </Label>
+      )}
+
+      <Input
+        type="file"
+        id="image"
+        accept="image/*"
+        {...register('headerImage')}
+        onChange={(e) => {
+          register('headerImage').onChange(e);
+          handleImageChange(e);
+        }}
+      />
+
       <Button className="bg-[#6879f9]">
         Save
       </Button>
