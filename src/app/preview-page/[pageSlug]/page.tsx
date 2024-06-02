@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect, useState } from 'react';
 import supabase from '@/db/supabase';
 import MobileView from '@/components/ui/mobileview';
 
@@ -11,9 +13,23 @@ const getPage = async (slug:string) => {
   return pages?.[0];
 };
 
-async function PreviewPage({ params }: { params: { pageSlug: string } }) {
+type Page={
+  title: string,
+  description:string
+  isLive:boolean
+  imageUrl:string
+}
+
+function PreviewPage({ params }: { params: { pageSlug: string } }) {
   const { pageSlug } = params;
-  const page = await getPage(pageSlug);
+
+  const [page, setPage] = useState<Page|undefined>();
+
+  useEffect(() => {
+    getPage(pageSlug).then((pg) => {
+      setPage(pg);
+    });
+  }, [pageSlug]);
 
   if (!page) {
     return <h1>Not Found</h1>;
@@ -23,12 +39,13 @@ async function PreviewPage({ params }: { params: { pageSlug: string } }) {
     return <h1>Not Live Yet</h1>;
   }
 
-  const { title, description } = page;
+  const { title, description, imageUrl } = page;
 
   return (
     <MobileView
       title={title}
       description={description}
+      image={imageUrl}
     />
   );
 }
