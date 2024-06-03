@@ -2,7 +2,6 @@
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { truncateText } from '@/lib/utils';
 import { Button } from './button';
 
 type MobileViewProps = {
