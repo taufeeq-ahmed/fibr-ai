@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { truncateText } from '@/lib/utils';
 import { Button } from './button';
 
 type MobileViewProps = {
@@ -66,7 +67,7 @@ function MobileView({
       <div className="p-4 flex flex-col justify-between h-[70%] ">
         <div>
           <h2 className="text-[36px] mb-4">{title}</h2>
-          <p>{description}</p>
+          <p>{truncateText(description, 300)}</p>
         </div>
         {buyLink && (
           <Link href={buyLink} target="_blank">
