@@ -1,6 +1,8 @@
 /* eslint-disable react/require-default-props */
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { Button } from './button';
 
 type MobileViewProps = {
   title: string;
@@ -39,8 +41,8 @@ function MobileView({
   }, [image]);
 
   return (
-    <div className={`mobile-view scale-${scale} border-2 bg-black w-[390px] h-[844px] rounded-md text-white `}>
-      <div className="header-image">
+    <div className={`mobile-view scale-${scale} border-2 bg-black w-[390px] h-[844px] rounded-md text-white m-2 overflow-hidden`}>
+      <div className="header-image h-[30%]">
         {typeof (image) === 'string' && image ? (
           <Image
             src={image}
@@ -59,10 +61,18 @@ function MobileView({
           )
         )}
       </div>
-      <div className="p-4">
-        <h2 className="text-[36px] mb-4">{title}</h2>
-        <p>{description}</p>
-        {buyLink && (<p>{buyLink}</p>)}
+      <div className="p-4 flex flex-col justify-between h-[70%] ">
+        <div>
+          <h2 className="text-[36px] mb-4">{title}</h2>
+          <p>{description}</p>
+        </div>
+        {buyLink && (
+          <Link href={buyLink}>
+            <Button className="bg-blue-500 font-semibold w-full mt-2">
+              BUY NOW
+            </Button>
+          </Link>
+        )}
       </div>
     </div>
   );

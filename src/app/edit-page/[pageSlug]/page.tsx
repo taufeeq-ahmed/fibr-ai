@@ -66,16 +66,20 @@ function EditPage({ params }:{params:{pageSlug:string}}) {
         imageUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/imagesBucket/${path}`;
       }
     }
+    const newData = {
+      title,
+      description,
+      slug: toKebabCase(title),
+      isLive,
+      buyLink,
+    };
+    if (imageUrl) {
+      Object.assign(newData, { imageUrl });
+    }
+
     await supabase
       .from('pages')
-      .update({
-        title,
-        description,
-        slug: toKebabCase(title),
-        isLive,
-        imageUrl,
-        buyLink,
-      })
+      .update(newData)
       .eq('id', page?.id)
       .select();
     toast.success('Landing Page is Updated Successfully');
