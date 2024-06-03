@@ -5,6 +5,8 @@ import Link from 'next/link';
 import React from 'react';
 import { truncateText } from '@/lib/utils';
 import Pulse from '@/components/ui/pulse';
+import supabase from '@/db/supabase';
+import { toast } from 'sonner';
 
 type ListPagesItemProps = {
     title:string,
@@ -12,6 +14,19 @@ type ListPagesItemProps = {
     isLive: boolean,
     slug:string
 }
+const handleDeletePage = async (slug:string) => {
+  const userConfirmed = window.confirm('Are you sure you want to delete this page?');
+
+  if (userConfirmed) {
+    await supabase
+      .from('pages')
+      .delete()
+      .eq('slug', slug);
+    toast.success('Landing Page deleted succesfully');
+  } else {
+    toast.error("Couldn't delete Landing");
+  }
+};
 
 function ListPagesItem({
   title, description, isLive, slug,
@@ -64,6 +79,7 @@ function ListPagesItem({
           <Button
             className="font-lg flex gap-2 bg-white  "
             variant="outline"
+            onClick={() => handleDeletePage(slug)}
           >
             {' '}
             <MdDeleteForever size={20} />
