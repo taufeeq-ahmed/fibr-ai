@@ -67,7 +67,7 @@ function MobileView({
       <div className="p-4 flex flex-col justify-between h-[70%] ">
         <div>
           <h2 className="text-[36px] mb-4">{title}</h2>
-          <p>{truncateText(description, 300)}</p>
+          <p>{description}</p>
         </div>
         {buyLink && (
           <Link href={buyLink} target="_blank">
