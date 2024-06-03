@@ -37,6 +37,7 @@ function CreatePage() {
         imageUrl = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/imagesBucket/${path}`;
       }
     }
+
     await supabase
       .from('pages')
       .upsert({

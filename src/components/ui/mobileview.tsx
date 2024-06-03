@@ -42,9 +42,10 @@ function MobileView({
 
   return (
     <div className={`mobile-view scale-${scale} border-2 bg-black w-[390px] h-[844px] rounded-md text-white m-2 overflow-hidden`}>
-      <div className="header-image h-[30%]">
+      <div className="header-image h-[30%] overflow-hidden flex justify-center items-center">
         {typeof (image) === 'string' && image ? (
           <Image
+            className="h-full w-auto"
             src={image}
             alt="header"
             width={500}
@@ -53,6 +54,7 @@ function MobileView({
         ) : (
           imageUrl && (
             <Image
+              className="h-full w-auto"
               src={imageUrl}
               alt="header"
               width={500}
@@ -67,7 +69,7 @@ function MobileView({
           <p>{description}</p>
         </div>
         {buyLink && (
-          <Link href={buyLink}>
+          <Link href={buyLink} target="_blank">
             <Button className="bg-blue-500 font-semibold w-full mt-2">
               BUY NOW
             </Button>

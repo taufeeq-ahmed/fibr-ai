@@ -18,6 +18,7 @@ type Page={
   description:string
   isLive:boolean
   imageUrl:string
+  buyLink:string
 }
 
 function PreviewPage({ params }: { params: { pageSlug: string } }) {
@@ -39,13 +40,16 @@ function PreviewPage({ params }: { params: { pageSlug: string } }) {
     return <h1>Not Live Yet</h1>;
   }
 
-  const { title, description, imageUrl } = page;
+  const {
+    title, description, imageUrl, buyLink,
+  } = page;
 
   return (
     <MobileView
       title={title}
       description={description}
       image={imageUrl}
+      buyLink={buyLink}
     />
   );
 }

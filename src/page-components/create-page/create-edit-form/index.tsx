@@ -124,6 +124,7 @@ function CreateEditForm({
           handleImageChange(e);
         }}
       />
+      {errors.headerImage && <Error field="headerImage" /> }
 
       <Label htmlFor="buyLink">PLease Enter Buy Link</Label>
       <Input
@@ -132,6 +133,7 @@ function CreateEditForm({
         {...register('buyLink', { required: true })}
         defaultValue={defaultValues?.buyLink || ''}
       />
+      {errors.buyLink && <Error field="buyLink" /> }
 
       <Button className="bg-[#6879f9]">
         Save
