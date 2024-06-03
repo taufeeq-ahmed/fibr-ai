@@ -54,12 +54,13 @@ function CreatePage() {
   };
 
   return (
-    <div className="flex">
+    <div className="flex p-4">
       <CreateEditForm
         mode="create"
         onSubmit={onSubmit}
         formControls={formControls}
       />
+
       <MobileView
         title={watch('title')}
         description={watch('description')}

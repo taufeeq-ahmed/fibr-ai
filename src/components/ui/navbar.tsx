@@ -14,7 +14,7 @@ function Navbar() {
   const pathname = usePathname();
 
   return (
-    <nav className="py-2 px-8 border-2 flex justify-between items-center sticky top-0">
+    <nav className="py-2 px-8 border-2 flex justify-between items-center sticky top-0 bg-white">
       <Link href="/">
         <Image
           src={fibrLogo}

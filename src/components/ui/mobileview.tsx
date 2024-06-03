@@ -41,7 +41,7 @@ function MobileView({
   }, [image]);
 
   return (
-    <div className={`mobile-view scale-${scale} border-2 bg-black w-[390px] h-[844px] rounded-md text-white m-2 overflow-hidden`}>
+    <div className={`mobile-view scale-${scale} border-2 bg-black w-[390px] h-[834px] rounded-md text-white m-1 overflow-hidden`}>
       <div className="header-image h-[30%] overflow-hidden flex justify-center items-center">
         {typeof (image) === 'string' && image ? (
           <Image

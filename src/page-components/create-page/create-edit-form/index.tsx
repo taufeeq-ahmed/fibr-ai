@@ -68,9 +68,16 @@ function CreateEditForm({
 
   return (
     <form
-      className="w-2/3 flex flex-col gap-4 p-4"
+      className="w-[70%] flex flex-col gap-4 p-4"
       onSubmit={handleSubmit(onSubmit)}
     >
+      <div className="flex justify-between">
+        <h3 className="text-lg font-bold">Please enter all the Details for Landing Page</h3>
+        <Button className="bg-[#6879f9] w-[120px]">
+          Save
+        </Button>
+      </div>
+
       <Label htmlFor="title">PLease Enter Title</Label>
       <Input
         id="title"
@@ -135,9 +142,6 @@ function CreateEditForm({
       />
       {errors.buyLink && <Error field="buyLink" /> }
 
-      <Button className="bg-[#6879f9]">
-        Save
-      </Button>
     </form>
   );
 }
